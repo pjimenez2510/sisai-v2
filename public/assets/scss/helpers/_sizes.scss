@@ -1,0 +1,50 @@
+// Variables
+$sizes: (
+  0: 0,
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%,
+  auto: auto
+);
+
+$pixel-sizes: (
+  0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 
+  100, 150, 200, 250, 300, 350, 400, 450, 500
+);
+
+// Mixins
+@mixin generate-size-classes($property) {
+  @each $key, $value in $sizes {
+    .#{$property}-#{$key} {
+      #{$property}: $value;
+    }
+  }
+  
+  @each $size in $pixel-sizes {
+    .#{$property}-#{$size}px {
+      #{$property}: #{$size}px;
+    }
+  }
+}
+
+// Generación de clases
+@include generate-size-classes(width);
+@include generate-size-classes(height);
+
+// Clases adicionales para ocupar todo el ancho/alto disponible
+.width-full {
+  width: 100vw;
+}
+
+.height-full {
+  height: 100vh;
+}
+
+// Clases para min-width y min-height
+@include generate-size-classes(min-width);
+@include generate-size-classes(min-height);
+
+// Clases para max-width y max-height
+@include generate-size-classes(max-width);
+@include generate-size-classes(max-height);

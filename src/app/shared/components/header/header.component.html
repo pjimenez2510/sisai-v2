@@ -1,0 +1,45 @@
+<mat-toolbar class="topbar">
+  <!-- Mobile Menu -->
+  @if (!showToggle) {
+    <button
+      mat-mini-fab
+      color="inherit"
+      (click)="toggleMobileNav.emit()"
+      class="d-flex justify-content-center"
+    >
+      <mat-icon class="d-flex">menu</mat-icon>
+    </button>
+  }
+  <span class="flex-1-auto"></span>
+
+  <!-- <a href="#" target="_blank" mat-flat-button color="primary">Download Free</a> -->
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- profile Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+  <button
+    mat-fab
+    extended
+    color="inherit"
+    [matMenuTriggerFor]="profilemenu"
+    aria-label="Notifications"
+    class="d-flex flex-direction-column justify-content-center align-items-center profile-btn-dd"
+  >
+    <img
+      src="/assets/images/profile/user-1.jpg"
+      class="rounded-circle object-cover icon-35 profile-dd"
+      width="35"
+    />
+  </button>
+  <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
+    <div class="p-x-12 m-t-12">
+      <a
+        [routerLink]="['/authentication/login']"
+        mat-stroked-button
+        color="primary"
+        class="w-100"
+        >Cerrar sesión</a
+      >
+    </div>
+  </mat-menu>
+</mat-toolbar>

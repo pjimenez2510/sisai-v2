@@ -1,0 +1,48 @@
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.table-container {
+  position: relative;
+  min-height: 200px;
+  overflow: auto;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.btn-edit {
+  color: #259603;
+}
+
+.btn-edit:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.btn-view {
+  color: #036fc7;
+}
+
+.btn-view:hover {
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+.btn-increment {
+  color: #ff9800;
+}
+
+.btn-increment:hover {
+  background-color: rgba(255, 152, 0, 0.1);
+}

@@ -1,0 +1,53 @@
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+  padding: 0 20px;
+}
+
+.not-found-card {
+  padding: 30px;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-title {
+  font-size: 26px;
+  color: #1976d2;
+  font-weight: bold;
+  text-align: center;
+}
+
+mat-card-content p {
+  font-size: 18px;
+  color: #424242;
+  margin: 10px 0;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+button[mat-raised-button] {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  background-color: #1976d2;
+  color: white;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #1565c0; /* Azul un poco más oscuro en hover */
+}
