@@ -1,0 +1,65 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>{{ title }}</mat-card-title>
+    <div class="col-lg-6">
+      <mat-label class="f-w-500 m-b-8 d-block">Filtro</mat-label>
+      <mat-form-field appearance="outline" class="w-100" color="primary">
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          #input
+          placeholder="Buscar..."
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" class="w-100" matSort>
+        <!-- Renderizar las columnas dinámicamente -->
+        @for (column of displayedColumns; track column) { @if(column.field ===
+        'actions') {
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <div class="actions">
+              @for (action of actions; track action) {
+              <a
+                matTooltip="{{ action.tooltip }}"
+                mat-icon-button
+                (click)="action.action(row)"
+              >
+                <mat-icon>{{ action.icon }}</mat-icon>
+              </a>
+              }
+            </div>
+          </td>
+        </ng-container>
+        } @else {
+        <ng-container [matColumnDef]="column.field">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ column.label }}
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row[column.field] }}</td>
+        </ng-container>
+        } }
+
+        <!-- Columna de acciones -->
+        <!-- Filas de la tabla -->
+        <tr mat-header-row *matHeaderRowDef="allColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: allColumns"></tr>
+
+        <!-- Mensaje cuando no hay datos -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="7">
+            Ninguna coincidencia con el filtro ingresado: "{{ input.value }}"
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25]"
+      aria-label="Páginas"
+    ></mat-paginator>
+  </mat-card-content>
+</mat-card>

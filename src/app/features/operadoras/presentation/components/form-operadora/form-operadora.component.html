@@ -1,7 +1,7 @@
 <mat-card class="cardWithShadow theme-card m-auto">
   <mat-card-content>
-    <mat-stepper [linear]="isLinear" #stepper >
-      <mat-step [stepControl]="operatorFormGroup" >
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="operatorFormGroup">
         <form [formGroup]="operatorFormGroup">
           <ng-template matStepLabel>Datos de la operadora</ng-template>
           <div class="max-width-500px m-auto">
@@ -195,7 +195,12 @@
               <button mat-button matStepperPrevious color="primary">
                 Regresar
               </button>
-              <button mat-flat-button matStepperNext color="primary">
+              <button
+                mat-flat-button
+                matStepperNext
+                color="primary"
+                (click)="save()"
+              >
                 Guardar
               </button>
             </div>

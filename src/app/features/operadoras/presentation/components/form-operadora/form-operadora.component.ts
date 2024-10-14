@@ -8,6 +8,8 @@ import {
 import { Validators } from 'angular-reactive-validation';
 import { ReactiveValidationModule } from 'angular-reactive-validation';
 import { MaterialModule } from '../../../../../material.module';
+import { OperatorUseCases } from '../../../domain/use-cases/operator.use-case';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-operadora',
@@ -16,13 +18,15 @@ import { MaterialModule } from '../../../../../material.module';
     FormsModule,
     ReactiveFormsModule,
     ReactiveValidationModule,
-    MaterialModule
+    MaterialModule,
   ],
   templateUrl: './form-operadora.component.html',
   styleUrl: './form-operadora.component.css',
 })
 export class FormOperadoraComponent {
   private _formBuilder = inject(FormBuilder);
+  private _saveOperatorUseCase = inject(OperatorUseCases);
+  private router = inject(Router);
   operatorFormGroup!: FormGroup;
   responsibleFormGroup!: FormGroup;
 
@@ -38,9 +42,32 @@ export class FormOperadoraComponent {
     this.responsibleFormGroup = this._formBuilder.group({
       firstName: ['', Validators.required('Los nombres son requeridos')],
       lastName: ['', Validators.required('Los apellidos son requeridos')],
-      email: ['', [Validators.required('El email es requerido'), Validators.email("El email no es valido")]],
+      email: [
+        '',
+        [
+          Validators.required('El email es requerido'),
+          Validators.email('El email no es valido'),
+        ],
+      ],
       phone: ['', Validators.required('El telefono es requerido')],
     });
   }
-  isLinear = false;
+  isLinear = true;
+
+  save() {
+    if (this.operatorFormGroup.valid && this.responsibleFormGroup.valid) {
+      const operatorData = this.operatorFormGroup.value;
+      const responsibleData = this.responsibleFormGroup.value;
+      this._saveOperatorUseCase
+        .createWithResponsible(operatorData, responsibleData)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/main/operadoras/lista']);
+          },
+          error: (error) => {
+            console.error('Error saving operator:', error);
+          },
+        });
+    }
+  }
 }
