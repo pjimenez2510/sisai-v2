@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
-import { CreateComponent } from './presentation/pages/create/create.component';
-import { ListComponent } from './presentation/pages/list/list.component';
+import { CreateContratosComponent } from './presentation/pages/create-contratos/create-contratos.component';
+import { ListContratosComponent } from './presentation/pages/list-contratos/list-contratos.component';
 
 export const contratosRoutes: Routes = [
   {
     path: 'crear',
-    component: CreateComponent,
+    component: CreateContratosComponent,
   },
   {
     path: 'lista',
-    component: ListComponent,
+    component: ListContratosComponent,
   },
   {
     path: '',
