@@ -9,8 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MaterialModule } from '../../../../../material.module';
-import { OperatorModel } from '../../../domain/models/operator.model';
-import { OperatorUseCases } from '../../../domain/use-cases/operator.use-case';
+import { OperatorFacade } from '../../../helpers/operator.facade';
+import { Operator } from '../../../interfaces/operator.interface';
 
 @Component({
   selector: 'app-table-operadoras',
@@ -29,14 +29,14 @@ export class TableOperadorasComponent implements OnInit, AfterViewInit {
     'responsible',
     'actions',
   ];
-  dataSource: MatTableDataSource<OperatorModel> =
-    new MatTableDataSource<OperatorModel>([]);
+  dataSource: MatTableDataSource<Operator> = new MatTableDataSource<Operator>(
+    []
+  );
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  private operatorUseCases = inject(OperatorUseCases);
-
+  operatorFacde = inject(OperatorFacade);
   ngOnInit(): void {
     this.loadOperators();
   }
@@ -47,13 +47,9 @@ export class TableOperadorasComponent implements OnInit, AfterViewInit {
   }
 
   loadOperators(): void {
-    this.operatorUseCases.getAll().subscribe({
+    this.operatorFacde.getAllEntities().subscribe({
       next: (operators) => {
         this.dataSource.data = operators;
-        console.log('Operators loaded:', operators);
-      },
-      error: (error) => {
-        console.error('Error loading operators:', error);
       },
     });
   }

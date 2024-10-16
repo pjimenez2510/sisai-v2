@@ -1,6 +1,6 @@
-import { OperatorEntity } from './entities/operator.entity';
+import { Operator } from '../interfaces/operator.interface';
 
-export const operadorasData: OperatorEntity[] = [
+export const operadorasData: Operator[] = [
   {
     codigo: 'OPE1',
     nombre: 'CNT',
@@ -15,7 +15,6 @@ export const operadorasData: OperatorEntity[] = [
       apellidos: 'Torres Castro',
       telefono: '0943123178',
       email: 'jtorres@gmail.com',
-      codigo_operadora: 'OPE1',
     },
   },
   {
@@ -32,7 +31,6 @@ export const operadorasData: OperatorEntity[] = [
       apellidos: 'González Pérez',
       telefono: '0933214321',
       email: 'mgonzalez@gmail.com',
-      codigo_operadora: 'OPE2',
     },
   },
   {
@@ -49,7 +47,6 @@ export const operadorasData: OperatorEntity[] = [
       apellidos: 'Mendoza Paredes',
       telefono: '0912345678',
       email: 'lmendoza@gmail.com',
-      codigo_operadora: 'OPE3',
     },
   },
   {
@@ -66,7 +63,6 @@ export const operadorasData: OperatorEntity[] = [
       apellidos: 'Martínez Suárez',
       telefono: '0923456789',
       email: 'amartinez@gmail.com',
-      codigo_operadora: 'OPE4',
     },
   },
   {
@@ -83,7 +79,6 @@ export const operadorasData: OperatorEntity[] = [
       apellidos: 'Herrera',
       telefono: '0934567890',
       email: 'cherrera@gmail.com',
-      codigo_operadora: 'OPE5',
     },
   },
   {
@@ -100,7 +95,6 @@ export const operadorasData: OperatorEntity[] = [
       apellidos: 'Torres Castro',
       telefono: '0945678901',
       email: 'jtorres@gmail.com',
-      codigo_operadora: 'OPE6',
     },
   },
   {
@@ -117,7 +111,6 @@ export const operadorasData: OperatorEntity[] = [
       apellidos: 'Herrera',
       telefono: '0945678901',
       email: 'cherrera@gmail.com',
-      codigo_operadora: 'OPE7',
     },
   },
   {
@@ -134,7 +127,6 @@ export const operadorasData: OperatorEntity[] = [
       apellidos: 'Torres Castro',
       telefono: '0956789012',
       email: 'jtorres@gmail.com',
-      codigo_operadora: 'OPE8',
     },
   },
 
@@ -152,7 +144,6 @@ export const operadorasData: OperatorEntity[] = [
       apellidos: 'Torres Castro',
       telefono: '0956789012',
       email: 'jtorres@gmail.com',
-      codigo_operadora: 'OPE9',
     },
   },
 ];
