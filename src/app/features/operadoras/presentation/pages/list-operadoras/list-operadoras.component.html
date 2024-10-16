@@ -1,1 +1,6 @@
-<app-table-operadoras></app-table-operadoras>
+<app-generic-table
+  [title]="'Lista de operadoras'"
+  [columns]="columns"
+  [data]="operators"
+  (actionClick)="onActionClick($event)"
+></app-generic-table>

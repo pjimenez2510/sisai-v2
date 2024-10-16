@@ -1,0 +1,70 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>{{ title }}</mat-card-title>
+    @if ( showFilter ) {
+    <div class="col-lg-6">
+      <mat-label class="f-w-500 m-b-8 d-block">Filtro</mat-label>
+      <mat-form-field appearance="outline" class="w-100" color="primary">
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          #input
+          [placeholder]="filterPlaceholder"
+        />
+      </mat-form-field>
+    </div>
+
+    }
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" class="w-100" matSort>
+        @for (column of columns; track $index) {
+        <ng-container [matColumnDef]="column.property">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ column.header }}
+          </th>
+          <td mat-cell *matCellDef="let row">
+            @if (!column.isAction) {
+            <ng-container>
+              {{ getValue(row, column.property) }}
+            </ng-container>
+
+            } @else {
+            <ng-template>
+              <div class="actions">
+                @for (action of column.actions; track action) {
+                <ng-container>
+                  <a
+                    [matTooltip]="action.tooltip"
+                    mat-icon-button
+                    [attr.aria-label]="action.ariaLabel"
+                    [class]="action.class"
+                    (click)="onActionClick(action.name, row)"
+                  >
+                    <mat-icon>{{ action.icon }}</mat-icon>
+                  </a>
+                </ng-container>
+                }
+              </div>
+            </ng-template>
+
+            }
+          </td>
+        </ng-container>
+        }
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+            {{ noDataMessage }}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="pageSizeOptions"
+      [attr.aria-label]="paginatorAriaLabel"
+    ></mat-paginator>
+  </mat-card-content>
+</mat-card>
