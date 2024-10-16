@@ -22,42 +22,38 @@ export class OperatorFacade
   private router = inject(Router);
 
   getEntity(id: number): Observable<Operator> {
-    throw new Error('Method not implemented.');
+    return this.operatorService.getById(id);
   }
   getAllEntities(): Observable<Operator[]> {
     return of(operadorasData);
   }
   createEntity(params: CreateOperator): Observable<Operator> {
-    throw new Error('Method not implemented.');
+    this.router.navigate(['/main/operadoras/lista']);
     return this.operatorService.create(params).pipe(
       tap((response) => {
-        this.messageService.showSuccessMessage('Operador creado exitosamente');
+        console.log(response);
+        this.messageService.showSuccessMessage('Operadora creada exitosamente');
         this.router.navigate(['/main/operadoras/lista']);
-      }),
-      tap((response) => {
-        this.messageService.handleError(response, 'Error al crear operador');
       })
     );
   }
   updateEntity(id: number, params: UpdateOperator): Observable<Operator> {
-    throw new Error('Method not implemented.');
     return this.operatorService.update(id, params).pipe(
       tap((response) => {
         this.messageService.showSuccessMessage(
-          'Operador actualizado exitosamente'
+          'Operadora actualizada exitosamente'
         );
         this.router.navigate(['/main/operadoras/lista']);
       }),
       tap((response) => {
         this.messageService.handleError(
           response,
-          'Error al actualizar operador'
+          'Error al actualizar la operadora'
         );
       })
     );
   }
   deleteEntity(id: number): Observable<boolean> {
-    throw new Error('Method not implemented.');
     return this.operatorService.delete(id).pipe(
       tap((response) => {
         this.messageService.showSuccessMessage(

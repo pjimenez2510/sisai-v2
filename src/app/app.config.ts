@@ -8,12 +8,15 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { httpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([httpErrorInterceptor])),
+    MatSnackBar,
   ],
 };

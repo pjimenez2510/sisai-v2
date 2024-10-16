@@ -14,13 +14,13 @@ import { GenericTableComponent } from '../../../../../shared/components/generic-
 export class ListOperadorasComponent {
   operators: Operator[] = [];
   columns = [
-    { property: 'id', header: 'ID' },
-    { property: 'name', header: 'Nombre' },
+    { property: 'codigo', header: 'Codigo' },
+    { property: 'nombre', header: 'Nombre' },
     { property: 'ruc', header: 'RUC' },
-    { property: 'phone1', header: 'Teléfono' },
-    { property: 'address', header: 'Dirección' },
-    { property: 'responsible.firstName', header: 'Nombre del Responsable' },
-    { property: 'responsible.lastName', header: 'Apellido del Responsable' },
+    { property: 'telefono1', header: 'Teléfono' },
+    { property: 'direccion', header: 'Dirección' },
+    { property: 'responsable.nombres', header: 'Nombre del Responsable' },
+    { property: 'responsable.apellidos', header: 'Apellido del Responsable' },
     {
       property: 'actions',
       header: 'Acciones',
@@ -61,11 +61,9 @@ export class ListOperadorasComponent {
   onActionClick(event: { action: string; row: Operator }) {
     switch (event.action) {
       case 'view':
-        // Lógica para ver operadora
         console.log('Ver operadora', event.row);
         break;
       case 'edit':
-        // Lógica para editar operadora
         console.log('Editar operadora', event.row);
         break;
     }

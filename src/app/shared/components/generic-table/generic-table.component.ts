@@ -23,7 +23,7 @@ export class GenericTableComponent {
   @Input() data: any[] = [];
   @Input() showFilter: boolean = true;
   @Input() filterPlaceholder: string = 'Ej. Buscar...';
-  @Input() noDataMessage: string = 'No se encontraron resultados para:';
+  @Input() noDataMessage: string = 'No hay datos para mostrar';
   @Input() pageSizeOptions: number[] = [5, 10, 25];
   @Input() paginatorAriaLabel: string = 'Seleccionar página';
 

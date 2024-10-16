@@ -4,6 +4,7 @@ import { ReactiveValidationModule } from 'angular-reactive-validation';
 import { MaterialModule } from '../../../../../material.module';
 import { OperatorFormStrategy } from '../../../strategies/operator-form.strategy';
 import { ResponsibleFormStrategy } from '../../../strategies/responsible-form.strategy';
+import { OperatorFacade } from '../../../helpers/operator.facade';
 
 @Component({
   selector: 'app-form-operadora',
@@ -23,7 +24,7 @@ export class FormOperadoraComponent implements OnInit {
   isLinear = true;
   operatorStrategy = inject(OperatorFormStrategy);
   responsibleStrategy = inject(ResponsibleFormStrategy);
-
+  operatorFacade = inject(OperatorFacade);
   ngOnInit(): void {
     this.operatorFormGroup = this.operatorStrategy.createForm();
     this.responsibleFormGroup = this.responsibleStrategy.createForm();
@@ -31,8 +32,16 @@ export class FormOperadoraComponent implements OnInit {
 
   save() {
     if (this.operatorFormGroup.valid && this.responsibleFormGroup.valid) {
-      const operatorData = this.operatorFormGroup.value;
-      const responsibleData = this.responsibleFormGroup.value;
+      const operator = this.operatorStrategy.prepareEntityData(
+        this.operatorFormGroup
+      );
+      const responsible = this.responsibleStrategy.prepareEntityData(
+        this.responsibleFormGroup
+      );
+      this.operatorFacade.createEntity({
+        ...operator,
+        responsable: { ...responsible },
+      });
     }
   }
 }

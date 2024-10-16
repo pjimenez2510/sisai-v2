@@ -6,3 +6,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .margin-p-none p { 
     margin: 0px;
 }
+
+
+
+.btn-edit {
+  color: #259603 !important;
+}
+
+.btn-edit:hover {
+  background-color: rgba(76, 175, 80, 0.1) !important;
+}
+
+.btn-view {
+  color: #036fc7 !important;
+}
+
+.btn-view:hover {
+  background-color: rgba(33, 150, 243, 0.1) !important;
+}
+
+.btn-increment {
+  color: #ff9800 !important;
+}
+
+.btn-increment:hover {
+  background-color: rgba(255, 152, 0, 0.1) !important;
+}

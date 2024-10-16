@@ -34,11 +34,6 @@ export class ResponsibleFormStrategy implements FormStrategy<Responsible> {
   }
   prepareEntityData(form: FormGroup) {
     const formValue = form.value;
-    return {
-      nombres: formValue.nombres,
-      apellidos: formValue.apellidos,
-      email: formValue.email,
-      telefono: formValue.telefono,
-    };
+    return formValue;
   }
 }
