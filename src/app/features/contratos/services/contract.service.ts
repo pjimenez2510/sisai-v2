@@ -4,8 +4,11 @@ import {
   Contract,
   CreateContract,
   UpdateContract,
-} from '../interfaces/contract.model';
+} from '../interfaces/contract.interface';
 import { environment } from '../../../environments/environment';
+import { Observable, of } from 'rxjs';
+import { ContractType } from '../interfaces/contract-type.interface';
+import { contraTypeData } from '../data/contract-type.data';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +25,9 @@ export class ContractService extends BaseHttpService<
   }
   protected override extractArrayItems(response: any): any[] {
     return response.data;
+  }
+
+  getContractTypes(): Observable<ContractType[]> {
+    return of(contraTypeData);
   }
 }

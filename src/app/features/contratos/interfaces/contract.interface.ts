@@ -1,8 +1,9 @@
 import { Operator } from '../../operadoras/interfaces/operator.interface';
-import { ContractType } from './contract-type.model';
-import { CreateSector, Sector, UpdateSector } from './sector';
+import { ContractType } from './contract-type.interface';
+import { CreateSector, Sector, UpdateSector } from './sector.interface';
 
 export interface ContractBase {
+  numero: string;
   fechaFirma: string | Date;
   cantidad: number;
   fechaInicio: number;

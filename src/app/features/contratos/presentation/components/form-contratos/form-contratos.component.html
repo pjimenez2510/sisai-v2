@@ -1,5 +1,89 @@
 <mat-card class="cardWithShadow theme-card m-auto">
   <mat-card-content>
-    <mat-stepper [linear]="isLinear" #stepper> </mat-stepper>
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="generalInformationFormGroup">
+        <form [formGroup]="generalInformationFormGroup">
+          <ng-template matStepLabel>Informacion General</ng-template>
+          <div class="max-width-500px m-auto">
+            <h3>Ingrese la informacion general del contrato</h3>
+
+            <div>
+              <mat-label class="f-w-500 m-b-4 d-block">Operadora</mat-label>
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <mat-select formControlName="codigoOperadora">
+                  <mat-option>Seleccione una operadora ...</mat-option>
+                  @for (operadora of operators; track operadora) {
+                  <mat-option [value]="operadora.codigo">{{
+                    operadora.nombre
+                  }}</mat-option>
+                  }
+                </mat-select>
+                <mat-error class="d-flex">
+                  <arv-validation-messages
+                    class="margin-p-none"
+                    for="codigoOperadora"
+                  ></arv-validation-messages>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-label class="f-w-500 m-b-4 d-block"
+                >Tipo de contrato</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <mat-select formControlName="codigoTipoContrato">
+                  <mat-option>Seleccione el tipo de contrato...</mat-option>
+                  @for (contractType of contractTypes; track contractType) {
+                  <mat-option [value]="contractType.codigo">{{
+                    contractType.nombre
+                  }}</mat-option>
+                  }
+                </mat-select>
+                <mat-error class="d-flex">
+                  <arv-validation-messages
+                    class="margin-p-none"
+                    for="codigoTipoContrato"
+                  ></arv-validation-messages>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-label class="f-w-500 m-b-4 d-block"
+                >Número del contrato</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input matInput formControlName="numero" />
+                <mat-error class="d-flex">
+                  <arv-validation-messages
+                    class="margin-p-none"
+                    for="numero"
+                  ></arv-validation-messages>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="primary">
+              <button mat-flat-button matStepperNext color="primary">
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
   </mat-card-content>
 </mat-card>

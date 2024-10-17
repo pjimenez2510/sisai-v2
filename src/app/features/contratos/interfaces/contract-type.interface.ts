@@ -1,5 +1,5 @@
 export interface ContractType {
-  id: string;
+  codigo: string;
   nombre: string;
   descripcion: string;
   valorUnitario: number;

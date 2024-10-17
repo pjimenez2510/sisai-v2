@@ -25,6 +25,7 @@ export class OperatorFacade
     return this.operatorService.getById(id);
   }
   getAllEntities(): Observable<Operator[]> {
+    console.log('operator');
     return of(operadorasData);
   }
   createEntity(params: CreateOperator): Observable<Operator> {

@@ -4,10 +4,12 @@ import {
   Contract,
   CreateContract,
   UpdateContract,
-} from '../interfaces/contract.model';
-import { Observable } from 'rxjs';
+} from '../interfaces/contract.interface';
+import { Observable, tap } from 'rxjs';
 import { ContractService } from '../services/contract.service';
 import { MessageWrapedService } from '../../../shared/services/message-wraped.service';
+import { Router } from '@angular/router';
+import { ContractType } from '../interfaces/contract-type.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,20 +19,41 @@ export class ContractFacade
 {
   contractService = inject(ContractService);
   messageService = inject(MessageWrapedService);
+  router = inject(Router);
 
   getEntity(id: number): Observable<Contract> {
-    throw new Error('Method not implemented.');
+    return this.contractService.getById(id);
   }
+
   getAllEntities(): Observable<Contract[]> {
-    throw new Error('Method not implemented.');
+    return this.contractService.getAll();
   }
+
   createEntity(params: CreateContract): Observable<Contract> {
-    throw new Error('Method not implemented.');
+    this.router.navigate(['/main/contratos/lista']);
+    return this.contractService.create(params).pipe(
+      tap(() => {
+        this.messageService.showSuccessMessage('Contrato creado exitosamente');
+        this.router.navigate(['/main/contratos/lista']);
+      })
+    );
   }
+
   updateEntity(id: number, params: UpdateContract): Observable<Contract> {
-    throw new Error('Method not implemented.');
+    return this.contractService.update(id, params).pipe(
+      tap(() => {
+        this.messageService.showSuccessMessage(
+          'Contrato actualizado exitosamente'
+        );
+      })
+    );
   }
+
   deleteEntity(id: number): Observable<boolean> {
-    throw new Error('Method not implemented.');
+    return this.contractService.delete(id);
+  }
+
+  getContractTypes(): Observable<ContractType[]> {
+    return this.contractService.getContractTypes();
   }
 }
