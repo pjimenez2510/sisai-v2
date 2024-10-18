@@ -25,6 +25,10 @@ export class ContractSectorFormStrategy implements FormStrategy<Sector> {
 
   sectorFacade = inject(SectorFacade);
 
+  constructor() {
+    this.loadData()
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group({
       codigoProvincia: ['', [Validators.required('La provincia es requerida')]],
@@ -58,17 +62,12 @@ export class ContractSectorFormStrategy implements FormStrategy<Sector> {
     });
   }
 
-  /* initCantonFilter(form: FormGroup) {
-    return form.get('codigoProvincia')?.valueChanges.pipe(
-      startWith(''),
-      map((value: string) => this._filterOperators(value))
-    );
+  changeProvince(value: string) {
+    return this.sectorFacade
+      .getCantonesByProvincias(value)
   }
 
-  private _filterOperators(value: string): Operator[] {
-    const filterValue = value.toLowerCase();
-    return this.operatorOptions.filter((option) =>
-      option.nombre.toLowerCase().includes(filterValue)
-    );
-  } */
+  changeCanton(value: string) {
+    return this.sectorFacade.getParroquiasByCanton(value)
+  }
 }

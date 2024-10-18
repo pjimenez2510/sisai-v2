@@ -32,6 +32,7 @@ export class ContractGeneralInformationFormStrategy
         '',
         [Validators.required('El tipo de contrato es requerido')],
       ],
+      documento: [null, [Validators.required('El documento del contrato es requerido')]],
     });
   }
 
