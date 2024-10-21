@@ -78,8 +78,13 @@
 
             <div>
               <mat-label>Seleccionar archivo</mat-label>
-              <mat-form-field class="w-100" appearance="outline"  >
-                <input matInput readonly [value]="fileName" formControlName="documento"/>
+              <mat-form-field class="w-100" appearance="outline">
+                <input
+                  matInput
+                  readonly
+                  [value]="contractFileName"
+                  formControlName="documento"
+                />
                 <button
                   mat-icon-button
                   matSuffix
@@ -92,7 +97,7 @@
                   type="file"
                   #fileInput
                   hidden
-                  (change)="onFileSelected($event)"
+                  (change)="onContractFileSelected($event)"
                 />
                 <mat-error class="d-flex">
                   <arv-validation-messages
@@ -101,7 +106,6 @@
                   ></arv-validation-messages>
                 </mat-error>
               </mat-form-field>
-
             </div>
 
             <div class="primary">
@@ -237,6 +241,139 @@
               </button>
               <button mat-flat-button matStepperNext color="primary">
                 Siguiente
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="detailFormGroup">
+        <form [formGroup]="detailFormGroup">
+          <ng-template matStepLabel>Detalle del contrato</ng-template>
+          <div class="max-width-500px m-auto">
+            <h3>Ingrese los detalles del contrato</h3>
+
+            <div>
+              <mat-label class="f-w-500 m-b-4 d-block">Cantidad</mat-label>
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input matInput formControlName="cantidad" type="number" />
+                <mat-error class="d-flex">
+                  <arv-validation-messages
+                    class="margin-p-none"
+                    for="cantidad"
+                  ></arv-validation-messages>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-label class="f-w-500 m-b-4 d-block"
+                >Fecha de inicio</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  [matDatepicker]="fechaI"
+                  formControlName="fechaInicio"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="fechaI"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #fechaI></mat-datepicker>
+                <mat-error class="d-flex">
+                  <arv-validation-messages
+                    class="margin-p-none"
+                    for="fechaInicio"
+                  ></arv-validation-messages>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-label class="f-w-500 m-b-4 d-block"
+                >Número de meses</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  formControlName="numberOfMonths"
+                  type="number"
+                />
+                <mat-error class="d-flex">
+                  <arv-validation-messages
+                    class="margin-p-none"
+                    for="numberOfMonths"
+                  ></arv-validation-messages>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-label class="f-w-500 m-b-4 d-block"
+                >Fecha de firma</mat-label
+              >
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <input
+                  matInput
+                  [matDatepicker]="fechaF"
+                  formControlName="fechaFirma"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="fechaF"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #fechaF></mat-datepicker>
+                <mat-error class="d-flex">
+                  <arv-validation-messages
+                    class="margin-p-none"
+                    for="fechaFirma"
+                  ></arv-validation-messages>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-label class="f-w-500 m-b-4 d-block">Observación</mat-label>
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                color="primary"
+              >
+                <textarea matInput formControlName="observacion"></textarea>
+                <mat-error class="d-flex">
+                  <arv-validation-messages
+                    class="margin-p-none"
+                    for="observacion"
+                  ></arv-validation-messages>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="primary">
+              <button
+                mat-flat-button
+                matStepperNext
+                color="primary"
+                (click)="save()"
+              >
+                Guardar
               </button>
             </div>
           </div>

@@ -6,7 +6,13 @@ import { ContractGeneralInformationFormStrategy } from '../../../strategies/cont
 import { ContractSectorFormStrategy } from '../../../strategies/contract-sector-form.strategy';
 import { Operator } from '../../../../operadoras/interfaces/operator.interface';
 import { ContractType } from '../../../interfaces/contract-type.interface';
-import { Canton, Parroquia, Provincia } from '../../../interfaces/sector.interface';
+import {
+  Canton,
+  Parroquia,
+  Provincia,
+} from '../../../interfaces/sector.interface';
+import { ContractDetailFormStrategy } from '../../../strategies/contract-detail-form.strategy';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-form-contratos',
@@ -19,59 +25,65 @@ import { Canton, Parroquia, Provincia } from '../../../interfaces/sector.interfa
   ],
   templateUrl: './form-contratos.component.html',
   styleUrl: './form-contratos.component.css',
+  providers: [provideNativeDateAdapter()],
 })
 export class FormContratosComponent implements OnInit {
   isLinear = true;
-  
+
   generalInformationFormGroup!: FormGroup;
   generalInformatioStrategy = inject(ContractGeneralInformationFormStrategy);
-  sectorStrategy = inject(ContractSectorFormStrategy);
   operators: Operator[] = [];
   contractTypes: ContractType[] = [];
- fileName: string = '';
+  contractFileName: string = '';
 
   sectorFormGroup!: FormGroup;
-  provincias: Provincia[] = []
-  cantones: Canton[] = []
-  parroquias: Parroquia[] = []
-  
+  sectorStrategy = inject(ContractSectorFormStrategy);
+  provincias: Provincia[] = [];
+  cantones: Canton[] = [];
+  parroquias: Parroquia[] = [];
+
+  detailFormGroup!: FormGroup;
+  detailStrategy = inject(ContractDetailFormStrategy);
+
   ngOnInit(): void {
     this.generalInformationFormGroup =
       this.generalInformatioStrategy.createForm();
-      this.operators = this.generalInformatioStrategy.operatorOptions;
-      this.contractTypes = this.generalInformatioStrategy.contractTypeOptions;
+    this.operators = this.generalInformatioStrategy.operatorOptions;
+    this.contractTypes = this.generalInformatioStrategy.contractTypeOptions;
 
-      this.sectorFormGroup = this.sectorStrategy.createForm();
-      this.provincias = this.sectorStrategy.provincias;
-      
+    this.sectorFormGroup = this.sectorStrategy.createForm();
+    this.provincias = this.sectorStrategy.provincias;
+
+    this.detailFormGroup = this.detailStrategy.createForm();
   }
 
   onChangeProvince(value: string) {
-    this.sectorFormGroup.get('codigoCanton')?.setValue(null)
-    this.sectorFormGroup.get('codigoParroquia')?.setValue(null)
-    if(!value) {
-      this.cantones = []
-      return
+    this.sectorFormGroup.get('codigoCanton')?.setValue(null);
+    this.sectorFormGroup.get('codigoParroquia')?.setValue(null);
+    if (!value) {
+      this.cantones = [];
+      return;
     }
     this.sectorStrategy.changeProvince(value).subscribe((response) => {
-      this.cantones = response
-    })
+      this.cantones = response;
+    });
   }
 
- onChangeCanton(value: string) {
-    this.sectorFormGroup.get('codigoParroquia')?.setValue(null)
-    if(!value) {
-      this.parroquias = []
-      return
+  onChangeCanton(value: string) {
+    this.sectorFormGroup.get('codigoParroquia')?.setValue(null);
+    if (!value) {
+      this.parroquias = [];
+      return;
     }
     this.sectorStrategy.changeCanton(value).subscribe((response) => {
-      this.parroquias = response
-    })
+      this.parroquias = response;
+    });
   }
 
   save() {
-    const generalInformation = this.generalInformationFormGroup.value;
-    console.log(generalInformation);
+    console.log(this.generalInformationFormGroup.value);
+    console.log(this.sectorFormGroup.value);
+    console.log(this.detailStrategy.prepareEntityData(this.detailFormGroup));
     if (this.generalInformationFormGroup.valid && this.sectorFormGroup.valid) {
       const generalInformation = this.generalInformationFormGroup.value;
       const observations = this.sectorFormGroup.value;
@@ -80,16 +92,14 @@ export class FormContratosComponent implements OnInit {
     }
   }
 
- onFileSelected(event: any) {
+  onContractFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
-      this.fileName = file.name;
+      this.contractFileName = file.name;
       this.generalInformationFormGroup.patchValue({
-        documento: file
+        documento: file,
       });
       this.generalInformationFormGroup.get('file')?.updateValueAndValidity();
     }
   }
-
-
 }

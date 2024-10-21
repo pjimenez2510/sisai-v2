@@ -1,1 +1,6 @@
-<p>list-contratos works!</p>
+<app-generic-table
+  [title]="'Lista de contratos'"
+  [columns]="columns"
+  [data]="contracts"
+  (actionClick)="onActionClick($event)"
+></app-generic-table>

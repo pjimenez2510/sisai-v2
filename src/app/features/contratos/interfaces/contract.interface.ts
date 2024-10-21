@@ -6,10 +6,10 @@ export interface ContractBase {
   numero: string;
   fechaFirma: string | Date;
   cantidad: number;
-  fechaInicio: number;
-  fechaFin: number;
+  fechaInicio: string;
+  fechaFin: string;
   valorTotal: number;
-  observacion: number;
+  observacion?: string;
 }
 
 export interface Contract extends ContractBase {
@@ -21,6 +21,7 @@ export interface Contract extends ContractBase {
 
 export interface CreateContract extends ContractBase {
   sector: CreateSector;
+  idOperadora: string;
 }
 
 export interface UpdateContract extends Partial<ContractBase> {

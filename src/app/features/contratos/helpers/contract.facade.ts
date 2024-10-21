@@ -5,11 +5,12 @@ import {
   CreateContract,
   UpdateContract,
 } from '../interfaces/contract.interface';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { ContractService } from '../services/contract.service';
 import { MessageWrapedService } from '../../../shared/services/message-wraped.service';
 import { Router } from '@angular/router';
 import { ContractType } from '../interfaces/contract-type.interface';
+import { contratosData } from '../data/contratos.data';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class ContractFacade
   }
 
   getAllEntities(): Observable<Contract[]> {
-    return this.contractService.getAll();
+    return of(contratosData);
   }
 
   createEntity(params: CreateContract): Observable<Contract> {
